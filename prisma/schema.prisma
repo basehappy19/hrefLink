@@ -1,0 +1,16 @@
+generator client {
+  provider   = "prisma-client"
+  output     = "./generated"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model OneTimeLink {
+  id        String   @id @default(uuid())
+  token     String   @unique // รหัสที่จะอยู่ในลิงก์ เช่น /go/abc12345
+  targetUrl String   // ลิงก์ปลายทางจริง
+  isUsed    Boolean  @default(false) // ตัวเช็คว่ากดไปหรือยัง
+  createdAt DateTime @default(now())
+}
