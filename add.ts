@@ -2,12 +2,16 @@ import { nanoid } from "nanoid";
 import "dotenv/config";
 import { prisma } from "./lib/prisma";
 
-const targetUrl = process.argv[2];
+let targetUrl = process.argv[2];
 
 if (!targetUrl) {
     console.error("❌ กรุณาใส่ URL ที่ต้องการย่อด้วยครับ");
     console.error("👉 ตัวอย่าง: npm run add https://google.com");
     process.exit(1);
+}
+
+if (!targetUrl.startsWith("http://") && !targetUrl.startsWith("https://")) {
+    targetUrl = `https://${targetUrl}`;
 }
 
 async function main() {

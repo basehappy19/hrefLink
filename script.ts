@@ -11,33 +11,6 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(cors());
 
-// app.post("/api/create-link", async (req, res) => {
-//     const { targetUrl } = req.body;
-
-//     if (!targetUrl) {
-//         return res.status(400).json({ error: "Please provide a targetUrl" });
-//     }
-
-//     const token = nanoid(10);
-
-//     try {
-//         const link = await prisma.oneTimeLink.create({
-//             data: {
-//                 token: token,
-//                 targetUrl: targetUrl,
-//             },
-//         });
-
-//         const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
-
-//         const generatedLink = `${baseUrl}/go/${token}`;
-
-//         res.json({ success: true, link: generatedLink });
-//     } catch (error) {
-//         console.error("Error creating link:", error);
-//         res.status(500).json({ error: "Failed to create link" });
-//     }
-// });
 
 app.get("/go/:token", async (req, res) => {
     const { token } = req.params;
